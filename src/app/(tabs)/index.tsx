@@ -1,9 +1,14 @@
 import dayjs from "dayjs";
 import { styled } from "nativewind";
-import { Image, Text, View } from "react-native";
+import { FlatList, Image, Text, View } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 import ListHeading from "../../../components/ListHeading";
-import { HOME_BALANCE, HOME_USER } from "../../../constants/data";
+import UpcomingSubscriptionCards from "../../../components/UpcomingSubscriptionCards";
+import {
+  HOME_BALANCE,
+  HOME_USER,
+  UPCOMING_SUBSCRIPTIONS,
+} from "../../../constants/data";
 import { icons } from "../../../constants/icon";
 import images from "../../../constants/images";
 import { formatCurrency } from "../../../lib/utils";
@@ -32,6 +37,16 @@ export default function Index() {
       </View>
       <View>
         <ListHeading title="Upcoming" />
+        <FlatList
+          data={UPCOMING_SUBSCRIPTIONS}
+          renderItem={({ item }) => <UpcomingSubscriptionCards {...item} />}
+          keyExtractor={(item) => item.id}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          ListEmptyComponent={
+            <Text className="home-empty-state">No Upcoming renewals yet.</Text>
+          }
+        />
       </View>
       <View>
         <ListHeading title="All Subscriptions" />

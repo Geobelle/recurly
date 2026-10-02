@@ -25,10 +25,12 @@
     },
     "plugins": [
       "expo-router",
+      "expo-secure-store",
+      "@clerk/expo",
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
+          "backgroundColor": "#fff9e3",
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }

@@ -3,7 +3,7 @@ import { tokenCache } from "@clerk/expo/token-cache";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack, useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
-import { Text, View } from "react-native";
+import { ActivityIndicator, Text, View } from "react-native";
 import "../../global.css";
 
 SplashScreen.preventAutoHideAsync();
@@ -49,20 +49,20 @@ function AppNavigator() {
   const segments = useSegments();
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (!isLoaded) return;
-  //   const inAuthGroup = segments[0] === "(auth)";
-  //   // if (!isSignedIn && !inAuthGroup) router.replace("/(auth)/sign-in");
-  //   // if (isSignedIn && inAuthGroup) router.replace("/(tabs)");
-  // }, [isLoaded, isSignedIn, router, segments]);
+  useEffect(() => {
+    if (!isLoaded) return;
+    const inAuthGroup = segments[0] === "(auth)";
+    if (!isSignedIn && !inAuthGroup) router.replace("/(auth)/sign-in");
+    if (isSignedIn && inAuthGroup) router.replace("/(tabs)");
+  }, [isLoaded, isSignedIn, router, segments]);
 
-  // if (!isLoaded) {
-  //   return (
-  //     <View className="flex-1 items-center justify-center bg-background">
-  //       <ActivityIndicator color="#ea7a53" />
-  //     </View>
-  //   );
-  // }
+  if (!isLoaded) {
+    return (
+      <View className="flex-1 items-center justify-center bg-background">
+        <ActivityIndicator color="#ea7a53" />
+      </View>
+    );
+  }
 
   return <Stack screenOptions={{ headerShown: false }} />;
 }

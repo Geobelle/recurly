@@ -12,3 +12,9 @@ export default function SubscriptionsDetails() {
     </View>
   );
 }
+
+function cityWeather(city: string) {
+  return new Promise((resolve) => {
+    //implement the fucntion - call the weather api and return the data
+  });
+}
